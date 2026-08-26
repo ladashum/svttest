@@ -1,1 +1,106 @@
-<!DOCTYPE html><html lang=ru><head><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1"><title>SEVENTEEN test</title></head><body><p>loading full file next</p></body></html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SEVENTEEN · Диагностический портрет</title>
+<style>
+  :root {
+    --rq: #f7cac9;
+    --rq-deep: #e8a4a8;
+    --ser: #92a8d1;
+    --ser-deep: #6d86b5;
+    --ink: #1b1f2a;
+    --paper: #f6f3f0;
+    --card: #fffdfb;
+    --muted: #6b7280;
+    --line: #e8e0dc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--paper); color: var(--ink); font-family: Georgia, serif; }
+  body { min-height: 100vh; }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 12px 12px 48px; }
+  header.hero {
+    background: linear-gradient(135deg, #1b1f2a 0%, #3a4568 55%, #6d4a55 100%);
+    color: #fff; border-radius: 16px; padding: 16px; margin-bottom: 10px;
+  }
+  .kicker { letter-spacing: .16em; text-transform: uppercase; font-size: 10px; color: var(--rq); font-family: system-ui, sans-serif; }
+  h1 { font-weight: 500; font-size: 22px; line-height: 1.15; margin: 6px 0; }
+  .sub { opacity: .86; font-size: 13px; line-height: 1.4; }
+  .meta { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; font-family: system-ui, sans-serif; font-size: 11px; }
+  .pill { border: 1px solid rgba(255,255,255,.25); padding: 3px 8px; border-radius: 999px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px; margin-bottom: 10px; }
+  h2 { font-size: 18px; font-weight: 500; margin-bottom: 8px; }
+  p { line-height: 1.6; }
+  .muted { color: var(--muted); }
+  .small { font-size: 14px; }
+  .sans { font-family: system-ui, sans-serif; }
+  button {
+    font-family: system-ui, sans-serif; border: 0; cursor: pointer;
+    background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 999px; font-size: 15px; min-height: 44px;
+  }
+  button.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  button:disabled { opacity: .4; cursor: not-allowed; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .progress-wrap { height: 6px; background: #ece6e2; border-radius: 99px; overflow: hidden; margin: 6px 0 10px; }
+  .progress { height: 100%; width: 0; background: linear-gradient(90deg, var(--rq-deep), var(--ser-deep)); }
+  .q-num { font-family: system-ui, sans-serif; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ser-deep); }
+  .q-text { font-size: 17px; margin: 6px 0 12px; }
+  .scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .opt {
+    border: 1px solid var(--line); background: #fff; border-radius: 14px; padding: 12px 6px; text-align: center;
+    cursor: pointer; font-family: system-ui, sans-serif; font-size: 12px;
+  }
+  .opt input { display: none; }
+  .opt.selected { border-color: var(--ink); background: #1b1f2a; color: #fff; }
+  .scale-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-top: 8px; font-family: system-ui, sans-serif; }
+  .hidden { display: none !important; }
+  .member-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; margin-top: 10px; }
+  .mchip { font-family: system-ui, sans-serif; font-size: 12px; border: 1px solid var(--line); border-radius: 12px; padding: 8px; }
+  .barline { height: 8px; background: #eee; border-radius: 99px; overflow: hidden; margin-top: 6px; }
+  .barfill { height: 100%; background: linear-gradient(90deg, var(--rq-deep), var(--ser-deep)); }
+  .result-hero { display: grid; gap: 16px; }
+  .match-card { border-radius: 20px; padding: 24px; color: #fff; background: linear-gradient(160deg, #2a3146, #5d3f48); }
+  .pct { font-size: 48px; font-weight: 500; }
+  .why { background: #fff; border-left: 4px solid var(--ser); padding: 14px 16px; margin: 10px 0; }
+  .disclaimer { font-size: 13px; color: var(--muted); margin-top: 18px; }
+  @media (max-width: 560px) {
+    .q-text { font-size: 16px; }
+    .opt { font-size: 13px; padding: 14px 0; min-height: 48px; }
+    .row button { flex: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero" id="intro">
+    <div class="kicker">SEVENTEEN · 13 portraits</div>
+    <h1>Кто ты из SEVENTEEN</h1>
+    <p class="sub">90 простых вопросов. Отвечай как есть, не как «правильно».</p>
+    <div class="meta">
+      <span class="pill">1–5</span>
+      <span class="pill">13 портретов</span>
+      <span class="pill">не клиника</span>
+    </div>
+    <div style="margin-top:12px;">
+      <button id="startBtn" type="button" style="background:#fff;color:#1b1f2a;width:100%;">Начать</button>
+    </div>
+  </header>
+  <section id="quiz" class="hidden">
+    <div class="card">
+      <div class="sans q-num" id="progressLabel">Вопрос 1 из 90</div>
+      <div class="progress-wrap"><div class="progress" id="bar"></div></div>
+      <div class="q-text" id="qText"></div>
+      <div class="scale" id="scale"></div>
+      <div class="scale-labels"><span>совсем не я</span><span>очень я</span></div>
+      <div class="row" style="margin-top:18px;">
+        <button class="ghost" id="prevBtn" type="button">Назад</button>
+        <button id="nextBtn" type="button" disabled>Дальше</button>
+      </div>
+    </div>
+  </section>
+  <section id="result" class="hidden"></section>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
